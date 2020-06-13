@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Touchable, TouchableOpacity } from 'react-nativ
 
 
 const GoalItem = props => {
+
     return (
         <TouchableOpacity onPress={() => props.onDelete(props.id)}>
             <View style={styles.listItem}>
