@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { TextInput, View, StyleSheet } from 'react-native'
 
 const SearchGoals = (props) => {
 
     const handleChange = text => {
-        console.log(text)
+        console.log('search: '+ text)
         props.onChange(text)
     }
 
     return (
-        <View style={StyleSheet.searchInput}>
+        <View style={styles.searchInput}>
             <TextInput
                 placeholder='search for a goal'
-                value={searchGoal}
+                // value={searchGoal}
                 onChangeText={handleChange}
             />
         </View>
@@ -21,10 +21,16 @@ const SearchGoals = (props) => {
 
 const styles = StyleSheet.create({
     searchInput: {
-        width: '90%',
+        width: '100%',
+        borderWidth: 3,
+        // borderColor: "dodgerblue",
+        borderColor: "lightsteelblue",
+        marginTop: 10, 
+        marginBottom: 10,
+        padding: 2,
+        paddingLeft: 20,
     }
 })
-
 
 
 export default SearchGoals
