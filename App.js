@@ -1,22 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-import GoalInput from './components/GoalInput';
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
+import GoalInput from './src/components/GoalInput'
 import axios from 'axios'
-import SearchGoals from './components/SearchGoal';
-import GoalItems from './components/GoalItems';
+import SearchGoals from './src/components/SearchGoals'
+import GoalItems from './src/components/GoalItems'
+import { Provider, useSelector, useDispatch } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
+import { searchGoal } from './src/redux/reducers'
+import { setSearchFieldAction } from './src/redux/actions'
 
 let route = 'http://10.0.2.2:8181/'
 
+const rootReducer = combineReducers({
+    searchGoal
+})
 
-export default function App() {
+const store = createStore(rootReducer)
+
+const App = function App() {
 
     const [courseGoals, setCourseGoals] = useState([])
     const [isAddGoal, setIsAddGoal] = useState(false)
-    const [searchGoal, setSearchGoal] = useState('')
+    const [searchField, setSearchField] = useState('')
 
-    useEffect(() => { getAllGoals() }, [courseGoals])
+    useEffect(() => { getAllGoals() }, [])
 
     const getAllGoals = async () => {
+        console.log('something is working')
         let res = await axios.get(`${route}items`)
         const goals = res.data
         setCourseGoals(goals)
@@ -41,18 +51,20 @@ export default function App() {
     }
 
     const changeSearch = (text) => {
-        setSearchGoal(text)
+        setSearchField(text)
     }
 
-    const filteredGoals = courseGoals.filter(g => g.item.includes(searchGoal))
+    const filteredGoals = courseGoals.filter(g => g.item.includes(searchField))
 
     return (
-        <View style={styles.screen}>
-            <SearchGoals onChange={changeSearch} />
-            <Button title="add a goal" onPress={() => setIsAddGoal(true)} />
-            <GoalInput onAddGoal={addGoal} visible={isAddGoal} closeMode={closeIsAddGoal} />
-            <GoalItems goals={filteredGoals} onDelete={deleteGoal} />
-        </View >
+        <Provider store={store}>
+            <View style={styles.screen}>
+                <SearchGoals onChange={changeSearch} />
+                <Button title="add a goal" onPress={() => setIsAddGoal(true)} />
+                <GoalInput onAddGoal={addGoal} visible={isAddGoal} closeMode={closeIsAddGoal} />
+                <GoalItems goals={filteredGoals} onDelete={deleteGoal} />
+            </View >
+        </Provider>
     );
 }
 
@@ -63,3 +75,5 @@ const styles = StyleSheet.create({
     },
 
 });
+
+export default App
