@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export const searchGoal = (state = initialState, action = {}) => {
-    console.log(action.type)
+    console.log('payload: ' + action.payload)
     switch (action.type) {
         case CHANGE_SEARCH_FIELD:
             return { ...state, searchField: action.payload }

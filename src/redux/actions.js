@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 
 const dispatch = useDispatch()
 
-
 export const setSearchFieldAction = (text) => {
     console.log(text)
     dispatch({
@@ -11,3 +10,4 @@ export const setSearchFieldAction = (text) => {
         payload: text
     })
 }
+
