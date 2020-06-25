@@ -5,37 +5,36 @@ import axios from 'axios'
 import SearchGoals from './SearchGoals'
 import GoalItems from './GoalItems'
 import { useSelector, useDispatch } from 'react-redux'
-import { setIsAddGoalAction } from '../redux/actions'
+import { setIsAddGoalAction, setAllGoalsAction } from '../redux/actions'
 
 
 let route = 'http://10.0.2.2:8181/'
 
 const AppAid = function App() {
 
-    const [courseGoals, setCourseGoals] = useState([])
-
     const dispatch = useDispatch()
-
     const { searchField } = useSelector(state => ({
         ...state.searchGoalReducer
     }));
-
+    const { goals } = useSelector(state => ({
+        ...state.setAllGoalsReducer
+    }));
     useEffect(() => { getAllGoals() }, [])
 
     const getAllGoals = async () => {
         console.log('getting all goals')
         let res = await axios.get(`${route}items`)
         const goals = res.data
-        setCourseGoals(goals)
+        console.log(goals)
+        setAllGoalsAction(goals, dispatch)
     }
 
     const addGoal = async (goalTitle) => {
         let key = Math.random().toString()
-        setCourseGoals(goals => [...goals, { item: goalTitle, key: key }])
         let newItem = { key: key, item: goalTitle }
         await axios.post(`${route}item`, newItem)
         await getAllGoals()
-        setIsAddGoalAction(false, dispatch)
+        await setIsAddGoalAction(false, dispatch)
     }
 
     const setIsAddGoal = (boolean) => {
@@ -47,7 +46,7 @@ const AppAid = function App() {
         getAllGoals()
     }
 
-    const filteredGoals = courseGoals.filter(g => g.item.includes(searchField))
+    const filteredGoals = goals.filter(g => g.item.includes(searchField))
 
     return (
         <View style={styles.screen}>

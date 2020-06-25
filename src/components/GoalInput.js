@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, Button, Modal } from 'react-native';
 import { setIsAddGoalAction, setEnteredGoalAction } from '../redux/actions'
 import { useSelector, useDispatch } from 'react-redux'
@@ -14,7 +14,6 @@ const GoalInput = props => {
     const { enteredGoal } = useSelector(state => ({
         ...state.setEnteredGoalReducer
     }));
-
 
     const changeIsAddGoal = (boolean) => {
         setIsAddGoalAction(boolean, dispatch)

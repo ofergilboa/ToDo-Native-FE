@@ -1,10 +1,12 @@
 import {
     CHANGE_SEARCH_FIELD,
     CHANGE_IS_ADD_GOAL,
-    CHANGE_ENTERED_GOAL
+    CHANGE_ENTERED_GOAL,
+    SET_ALL_GOALS
 } from './constants'
 
 const initialState = {
+    goals: [],
     searchField: '',
     enteredGoal: '',
     isAddGoal: false
@@ -32,6 +34,15 @@ export const setEnteredGoalReducer = (state = initialState, action = {}) => {
     switch (action.type) {
         case CHANGE_ENTERED_GOAL:
             return { ...state, enteredGoal: action.payload }
+        default:
+            return state
+    }
+}
+
+export const setAllGoalsReducer = (state = initialState, action = {}) => {
+    switch (action.type) {
+        case SET_ALL_GOALS:
+            return { ...state, goals: action.payload }
         default:
             return state
     }
