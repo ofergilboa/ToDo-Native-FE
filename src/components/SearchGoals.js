@@ -1,31 +1,28 @@
 import React from 'react'
 import { TextInput, View, StyleSheet, Text } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { CHANGE_SEARCH_FIELD } from '../redux/constants'
-
+import { setSearchFieldAction } from '../redux/actions'
 
 const SearchGoals = () => {
 
-    const { searchField } = useSelector(state => ({
-        ...state.searchGoal
-    }));
+    // const { searchField } = useSelector(state => ({
+    //     ...state.searchGoalReducer
+    // }));
 
     const dispatch = useDispatch()
 
     function handleChange(text) {
-        dispatch({
-            type: "CHANGE_SEARCH_FIELD",
-            payload: text
-        });
+        setSearchFieldAction(text, dispatch)
     }
+
 
     return (
         <View style={styles.searchInput}>
+            {/* <Text>search for: {searchField} </Text> */}
             <TextInput
                 placeholder='search for a goal'
                 onChangeText={handleChange}
             />
-            <Text>search: {searchField} </Text>
         </View>
     )
 }

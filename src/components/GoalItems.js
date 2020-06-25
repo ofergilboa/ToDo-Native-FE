@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Touchable, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import GoalItem from './GoalItem';
 
 

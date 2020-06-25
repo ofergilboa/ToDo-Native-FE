@@ -1,12 +1,14 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
-import { searchGoal } from './src/redux/reducers'
+import { searchGoalReducer,isAddGoalReducer, setEnteredGoalReducer } from './src/redux/reducers'
 import AppAid from './src/components/AppAid'
 
 
 const rootReducer = combineReducers({
-    searchGoal
+    searchGoalReducer,
+    isAddGoalReducer,
+    setEnteredGoalReducer
 })
 
 const store = createStore(rootReducer)
