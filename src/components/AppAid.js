@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     screen: {
         padding: 30,
         paddingTop: 20,
+        flex:1
     },
 
 });
