@@ -1,14 +1,24 @@
 import { useSelector } from 'react-redux'
 
+const getSelectors = (value) => {
 
-// export const { isAddGoal } = useSelector(state => ({
-//     ...state.isAddGoalReducer
-// }));
+    switch (value) {
+        case 'isAddGoal':
+            return (useSelector(state => (
+                state.GoalsReducer.isAddGoal)))
+        case 'enteredGoal':
+            return (useSelector(state => (
+                state.GoalsReducer.enteredGoal)))
+        case 'searchField':
+            return (useSelector(state => (
+                state.GoalsReducer.searchField)))
+        case 'goals':
+            return (useSelector(state => (
+                state.GoalsReducer.goals)))
+        default:
+            return value
+    }
+}
 
-// export const { enteredGoal } = useSelector(state => ({
-//     ...state.setEnteredGoalReducer
-// }));
 
-// export const { searchField } = useSelector(state => ({
-//     ...state.searchGoalReducer
-// }));
+export default getSelectors

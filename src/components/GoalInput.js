@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import axios from 'axios'
 import { StyleSheet, View, TextInput, Button, Modal } from 'react-native';
 import { setIsAddGoalAction, setEnteredGoalAction } from '../redux/actions'
-import { useSelector, useDispatch } from 'react-redux'
-
+import { useDispatch } from 'react-redux'
+import getSelectors from '../redux/selectors'
+import { addGoal } from '../services/services'
 
 const GoalInput = props => {
 
     const dispatch = useDispatch()
-
-    const { isAddGoal } = useSelector(state => ({
-        ...state.isAddGoalReducer
-    }));
-    const { enteredGoal } = useSelector(state => ({
-        ...state.setEnteredGoalReducer
-    }));
+    const isAddGoal = getSelectors('isAddGoal')
+    const enteredGoal = getSelectors('enteredGoal')
 
     const changeIsAddGoal = (boolean) => {
         setIsAddGoalAction(boolean, dispatch)
@@ -24,7 +21,7 @@ const GoalInput = props => {
     }
 
     return (
-        <Modal visible={isAddGoal} animationType={"slide"}>
+        < Modal visible={isAddGoal} animationType={"slide"} >
             <View style={styles.topContainer}>
                 <TextInput
                     placeholder="course goals"
@@ -42,14 +39,14 @@ const GoalInput = props => {
                     <View style={styles.button}>
                         <Button title="ADD"
                             onPress={() => {
-                                props.onAddGoal(enteredGoal);
+                                addGoal(enteredGoal, dispatch);
                                 inputHandler('')
                             }}
                         />
                     </View>
                 </View>
             </View>
-        </Modal>
+        </Modal >
     )
 }
 

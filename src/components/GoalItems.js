@@ -1,21 +1,26 @@
 import React from 'react'
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import GoalItem from './GoalItem';
+import getSelectors from '../redux/selectors'
 
 
 const GoalItems = props => {
 
-    return (        
+    const searchField = getSelectors('searchField')
+    const goals = getSelectors('goals')
+
+    const filteredGoals = goals.filter(g => g.item.includes(searchField))
+
+    return (
         <ScrollView style={styles.listItems}>
-            {props.goals
-                ? props.goals.map((goal) => (
-                    <GoalItem 
-                        item={goal.item}
-                        id={goal.key}
-                        key={goal.key}
-                        onDelete={props.onDelete}>
-                    </GoalItem>))
-                : null}
+            {filteredGoals.map((goal) => (
+                <GoalItem
+                    item={goal.item}
+                    id={goal.key}
+                    key={goal.key}
+                >
+                </GoalItem>))
+            }
         </ScrollView>
     )
 }
