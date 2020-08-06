@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, ScrollView, View } from 'react-native';
+import { StyleSheet, ScrollView, View, Text } from 'react-native';
 import GoalItem from './GoalItem';
 import getSelectors from '../redux/selectors'
 
@@ -13,13 +13,15 @@ const GoalItems = props => {
 
     return (
         <ScrollView style={styles.listItems}>
-            {filteredGoals.map((goal) => (
-                <GoalItem
-                    item={goal.item}
-                    id={goal.key}
-                    key={goal.key}
-                >
-                </GoalItem>))
+            {filteredGoals[0] ?
+                filteredGoals.map((goal) => (
+                    <GoalItem
+                        item={goal.item}
+                        id={goal.key}
+                        key={goal.key}
+                    >
+                    </GoalItem>))
+                : <Text>no goals yet</Text>
             }
         </ScrollView>
     )

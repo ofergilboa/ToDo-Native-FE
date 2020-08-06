@@ -15,8 +15,8 @@ const AppAid = () => {
 
     return (
         <View style={styles.screen}>
-            <SearchGoals />
             <Button title="add a goal" onPress={() => setIsAddGoalAction(true, dispatch)} />
+            <SearchGoals />
             <GoalInput />
             <GoalItems />
         </View >
@@ -25,8 +25,9 @@ const AppAid = () => {
 
 const styles = StyleSheet.create({
     screen: {
-        padding: 30,
-        paddingTop: 20,
+        padding: 20,
+        paddingTop: 40,
+        paddingBottom: 15,
         flex:1
     },
 
