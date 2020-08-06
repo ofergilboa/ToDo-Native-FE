@@ -11,6 +11,7 @@ A mobile app built with React-Native.
 ### Built With:
 - React-Native
 - Redux
+- Expo
 - Node.JS
 - Express
 - MongoDB
